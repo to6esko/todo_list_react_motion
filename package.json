@@ -1,0 +1,35 @@
+{
+  "name": "todo_list_react_motion",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "webpack-dev-server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/to6esko/todo_list_react_motion.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/to6esko/todo_list_react_motion/issues"
+  },
+  "homepage": "https://github.com/to6esko/todo_list_react_motion#readme",
+  "dependencies": {
+    "react": "^15.0.2",
+    "react-dom": "^15.0.2",
+    "react-motion": "^0.4.3",
+    "ajax":"*",
+    "jquery":"*",
+    "lodash.range":"*",
+    "babel-cli":"*",
+    "babel-plugin-lodash":"*",
+    "babel-preset-stage-2":"*",
+    "babel-plugin-transform-flow-strip-types": "*",
+    "babel-plugin-transform-object-rest-spread": "*",
+    "babel-plugin-transform-class-properties": "*",
+    "performance-now":"*",
+    "raf":"*"
+  }
+}
