@@ -227,12 +227,15 @@ class App extends React.Component {
             items: Array.from(Array(totalNumber).keys())
         }
     }
+
+
     render() {
         return (
             <div>
                 {this.state.items.map((key) => {
+                    const sign = key % 2 === 0 ? 1: -1;
                     return <Motion key={key} defaultStyle={{ rotate: 0 }}
-                        style={{ rotate: spring(360, presets.moble) }}>
+                        style={{ rotate: spring(sign*360, presets.moble) }}>
                         {(obj) => {
                             const {rotate} = obj;
                             let style = {
