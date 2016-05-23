@@ -227,7 +227,6 @@ class App extends React.Component {
             items: Array.from(Array(totalNumber).keys())
         }
     }
-    
     render() {
         return (
             <div>
