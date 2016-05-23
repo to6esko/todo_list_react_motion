@@ -137,6 +137,7 @@ class App extends React.Component {
  
 }
 */
+/*
 //not work
 class App extends React.Component {
     constructor() {
@@ -145,48 +146,67 @@ class App extends React.Component {
             items: Array.from(Array(8).keys())
         }
     }
-    
+/*
+    getDefaults=()=> {
+        return this.state.items.map((key) => ({
+        ...items, val:{
+                rotate: 0,
+                scale: 1
+            }
+        }))
+}
+ getEnds=()=> {
+     return this.state.items.map((key) => ({
+        ...items, val:{
+             rotate: 360,
+             scale: 1
+         }
+        }))
+}
+  
     getDefaults = () => {
         let obj = {};
-        let items = this.state.items;
-        items.forEach((key) => {
+       this.state.items.forEach((key) => {
             obj[key] = {
-                    rotate: 0
-                
+                    rotate: 0,
+                    scale: 1
             }
         })
+        console.log(obj);
         return obj;
     }
 
     getEnds = () => {
         let obj = {};
-        let items = this.state.items;
-        items.forEach((key) => {
-            obj[key] = {
-                    rotate: spring(-360, presets.moble)
-                
+        this.state.items.forEach((key) => {
+             obj[key] = {
+                    rotate: spring(360),
+                    sclae: spring(1)
             }
         })
+        console.log(obj);
         return obj;
     }
 
     render() {
         return (
             <Motion
-                defaultStyle={this.getDefaults() }
+                defaultStyle={{rotate:360} }
                 style={this.getEnds() }>
                 {(current) =>
                     <div>
                         {Object.keys(current).map((key) => {
-                            let {rotate} = current[key];
+                            const {rotate, scale} = current[key];
+                            
                             let style = {
-                                transform: `rotate(${rotate}deg)`
+                                transform: `rotate(${rotate}deg) scale(${scale})`
                             }
                             return (
                                 <div
                                     className="blockContent"
                                     key={key}
                                     style={style}>
+                                    {key}
                                 </div>
                             )
                         }) }
@@ -196,24 +216,36 @@ class App extends React.Component {
         )
     }
 }
+*/
 
-/*
 //work
 class App extends React.Component {
+    constructor() {
+        super();
+        const totalNumber = 8;
+        this.state = {
+            items: Array.from(Array(totalNumber).keys())
+        }
+    }
+    
     render() {
         return (
-            <Motion defaultStyle={{ rotate: 0}}
-            style={{rotate: spring(360, presets.moble)}}>
-                {(obj) => {
-                    const {rotate} = obj;
-                    let style = {
-                        transform: `rotate(${rotate}deg)`
-                    }
-                    return <div style={style} className="block"></div>
-                } }
-            </Motion>
+            <div>
+                {this.state.items.map((key) => {
+                    return <Motion key={key} defaultStyle={{ rotate: 0 }}
+                        style={{ rotate: spring(360, presets.moble) }}>
+                        {(obj) => {
+                            const {rotate} = obj;
+                            let style = {
+                                transform: `rotate(${rotate}deg)`
+                            }
+                            return <div style={style} className="block"></div>
+                        } }
+                    </Motion>
+                })}        
+           </div>
         )
     }
 }
-*/
+
 export default App;
