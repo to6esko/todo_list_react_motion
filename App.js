@@ -39,12 +39,13 @@ class App extends React.Component {
                 <div>
                     {this.state.items.map((key) => {
                         const sign = key % 2 === 0 ? 1 : -1;
-                        return <Motion key={key} defaultStyle={{ rotate: 0 }}
-                            style={{ rotate: spring(sign * 360, presets.moble) }}>
+                        return <Motion key={key} defaultStyle={{ rotate: 0, scale:0,opacity:1 }}
+                            style={{ rotate: spring(sign * 360, presets.moble), scale:spring(1) }}>
                             {(obj) => {
-                                const {rotate} = obj;
+                                const {rotate,scale} = obj;
                                 let style = {
-                                    transform: `rotate(${rotate}deg)`
+                                    transform: `rotate(${rotate}deg) scale(${scale})`
+                                    
                                 }
                                 return <div style={style} onClick={this.handleRemove.bind(null, key) } className="block"></div>
                             } }
