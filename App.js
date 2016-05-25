@@ -3,8 +3,8 @@ import {TransitionMotion, StaggeredMotion, Motion, spring} from './react-motion-
 import presets from './presets';
 
 
-/*
-not work
+
+// work
 class App extends React.Component {
     constructor() {
         super();
@@ -29,88 +29,32 @@ class App extends React.Component {
             this.setState({ items });
         }
     }
-    getDefaults = () => {
-        let obj = {};
-        obj = this.state.items.map((key) => {
-            return obj[key] = {
-                    width: 50,
-                    opacity: 0,
-                    scale: 5
-                
-            }
-        });
-        console.log(obj)
-        return obj;
-    }
-    getEnds = () => {
-        let obj = {};
-        obj = this.state.items.map((key) => {
-            return obj[key] = {
-                    width: spring(100),
-                    opacity: spring(1),
-                    scale: spring(1)
-                
-            }
-        });
-        console.log(obj);
-        return obj;
-    }
 
-    willLeave = () => {
-        return {
-            width: 0,
-            opacity: 0,
-            scale: 0
-        }
-    }
-    willEnter = () => {
-        return {
-            width: 0,
-            opacity: 0,
-            scale: 1
-        }
-    }
 
     render() {
         return (
             <div>
-                <button onClick={()=>this.handleAdd() }>Add Box</button>
+                <button onClick={() => this.handleAdd() }>Add Box</button>
                 <hr/>
-                <TransitionMotion
-                    defaultStyles={this.getDefaults() }
-                    styles={this.getEnds() }
-
-                    willEnter={this.willEnter}
-                    willLeave={this.willLeave}>
-                    {(current) => 
-                        <div>
-                            {Object.keys(current).map((key) => {
-                                let {width, opacity, scale} = current[key];
+                <div>
+                    {this.state.items.map((key) => {
+                        const sign = key % 2 === 0 ? 1 : -1;
+                        return <Motion key={key} defaultStyle={{ rotate: 0 }}
+                            style={{ rotate: spring(sign * 360, presets.moble) }}>
+                            {(obj) => {
+                                const {rotate} = obj;
                                 let style = {
-                                    width,
-                                    opacity,
-                                    WebkitTransform: `scale(${scale})`,
-                                    transform: `scale(${scale})`
-
+                                    transform: `rotate(${rotate}deg)`
                                 }
-                                console.log(style);
-                                return (
-                                    <div
-                                        className="blockContent"
-                                        onClick={this.handleRemove.bind(null, key) }
-                                        key={key}
-                                        style={style}>
-                                        {key}
-                                    </div>
-                                );
-                            }) }
-                        </div>
-                    } 
-                </TransitionMotion>
+                                return <div style={style} onClick={this.handleRemove.bind(null, key) } className="block"></div>
+                            } }
+                        </Motion>
+                    }) }
+                </div>
             </div>
         )
     }
-*/
+}
 /*
 //work
      render() {
@@ -217,7 +161,7 @@ class App extends React.Component {
     }
 }
 */
-
+/*
 //work
 class App extends React.Component {
     constructor() {
@@ -249,5 +193,5 @@ class App extends React.Component {
         )
     }
 }
-
+*/
 export default App;
